@@ -1,8 +1,14 @@
 import streamlit as st
 import requests
+import os
+from dotenv import load_dotenv
 
-
+load_dotenv()
 # Set up the Streamlit app
+
+backend_url = os.environ.get("BACKEND_URL")
+
+
 def main():
     st.title("Basic Chatbot App")
     st.write("Type your query below and get a response!")
@@ -23,7 +29,7 @@ def main():
             try:
                 # Make the POST request to the API endpoint
                 # Replace 'API_ENDPOINT_URL' with the actual endpoint URL
-                response = requests.post("http://127.0.0.1:5000/response", json=payload)
+                response = requests.post(f"{backend_url}/response", json=payload)
 
                 if response.status_code == 200:
                     # Parse the JSON response
